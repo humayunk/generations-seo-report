@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generations Health - SEO Report | March 2026</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #f8f9fa;
+      color: #1a1a2e;
+      line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a5c3a, #2d8a5e);
+      color: #fff;
+      padding: 3rem 2rem;
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+    .header .date {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Section */
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.25rem;
+      color: #1a5c3a;
+    }
+    .section .section-sub {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1.5rem;
+    }
+    .section h3 {
+      font-size: 1.05rem;
+      margin: 1.5rem 0 0.75rem;
+      color: #333;
+    }
+    .section p {
+      margin-bottom: 1rem;
+      color: #444;
+    }
+    .section ul, .section ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      color: #444;
+    }
+    .section li { margin-bottom: 0.4rem; }
+
+    /* Metric Cards */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .metric-card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .metric-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a5c3a;
+    }
+    .metric-card .value.warn { color: #e67e22; }
+    .metric-card .value.bad { color: #e74c3c; }
+    .metric-card .label {
+      font-size: 0.8rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 0.25rem;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+    thead th {
+      text-align: left;
+      padding: 0.75rem;
+      background: #f1f3f5;
+      color: #555;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    tbody td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #f0f0f0;
+      color: #444;
+    }
+    tbody tr:hover { background: #fafbfc; }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .badge-done { background: #d4edda; color: #155724; }
+    .badge-plan { background: #cce5ff; color: #004085; }
+    .badge-dev { background: #fff3cd; color: #856404; }
+    .badge-high { background: #f8d7da; color: #721c24; }
+    .badge-med { background: #fff3cd; color: #856404; }
+    .badge-low { background: #e2e3e5; color: #383d41; }
+
+    /* Position indicator */
+    .pos {
+      display: inline-block;
+      min-width: 2rem;
+      text-align: center;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .pos-good { background: #d4edda; color: #155724; }
+    .pos-mid { background: #fff3cd; color: #856404; }
+    .pos-bad { background: #f8d7da; color: #721c24; }
+
+    /* Change log */
+    .change-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .change-item:last-child { border-bottom: none; }
+    .change-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .change-icon.green { background: #d4edda; }
+    .change-detail .change-title { font-weight: 600; font-size: 0.95rem; }
+    .change-detail .change-desc { font-size: 0.85rem; color: #666; margin-top: 2px; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: #aaa;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      .header { padding: 2rem 1.5rem; }
+      .container { padding: 1rem; }
+      .section { padding: 1.5rem; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .header h1 { font-size: 1.5rem; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .section { box-shadow: none; border: 1px solid #e0e0e0; break-inside: avoid; }
+      .header { background: #1a5c3a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-inner">
+      <h1>Generations Health - SEO Report</h1>
+      <div class="subtitle">generationshealthmi.com | Keyword Optimization & Site Health</div>
+      <div class="date">Report Date: March 23, 2026 | Prepared by: Practice with Joy</div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Executive Summary -->
+    <div class="section">
+      <h2>Executive Summary</h2>
+      <p class="section-sub">Where we are and what we're doing about it</p>
+      <p>We conducted a comprehensive SEO audit of generationshealthmi.com using Semrush to assess current keyword rankings, site health, and optimization opportunities. The site is new and pre-launch, so traffic and rankings are just beginning to establish. We've already made targeted improvements to page titles and meta descriptions to position the site for better search visibility as the practice opens.</p>
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="value">2</div>
+          <div class="label">Authority Score</div>
+        </div>
+        <div class="metric-card">
+          <div class="value">28</div>
+          <div class="label">Organic Keywords</div>
+        </div>
+        <div class="metric-card">
+          <div class="value warn">79%</div>
+          <div class="label">Site Health</div>
+        </div>
+        <div class="metric-card">
+          <div class="value">8</div>
+          <div class="label">Referring Domains</div>
+        </div>
+      </div>
+      <p>The authority score of 2 is expected for a new site. As the practice opens, builds local citations, and publishes content, this will grow. Our focus right now is ensuring the site is technically sound and optimized for the right keywords so it's ready to rank when patients start searching.</p>
+    </div>
+
+    <!-- Current Keywords -->
+    <div class="section">
+      <h2>Current Keyword Rankings</h2>
+      <p class="section-sub">What Google currently associates with generationshealthmi.com</p>
+      <p>The site currently ranks for 28 keywords, but they're almost entirely brand-name variations. No service-related terms like "primary care," "family doctor," or "pediatrician" appear. This is the primary gap.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Position</th>
+            <th>Monthly Volume</th>
+            <th>Assessment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>generations health</td>
+            <td><span class="pos pos-mid">22</span></td>
+            <td>110</td>
+            <td>Brand term - should be top 5</td>
+          </tr>
+          <tr>
+            <td>generations family health</td>
+            <td><span class="pos pos-mid">27</span></td>
+            <td>50</td>
+            <td>Brand variant</td>
+          </tr>
+          <tr>
+            <td>generation family practice</td>
+            <td><span class="pos pos-mid">29</span></td>
+            <td>110</td>
+            <td>Brand variant - good signal</td>
+          </tr>
+          <tr>
+            <td>generations medical</td>
+            <td><span class="pos pos-mid">37</span></td>
+            <td>170</td>
+            <td>Competing with other "Generations" orgs</td>
+          </tr>
+          <tr>
+            <td>generational health</td>
+            <td><span class="pos pos-mid">39</span></td>
+            <td>210</td>
+            <td>Generic term - hard to own</td>
+          </tr>
+          <tr>
+            <td>generations family health center</td>
+            <td><span class="pos pos-mid">46</span></td>
+            <td>590</td>
+            <td>High volume but competing with other clinics</td>
+          </tr>
+          <tr>
+            <td>generations family medicine</td>
+            <td><span class="pos pos-bad">55</span></td>
+            <td>590</td>
+            <td>High volume - needs improvement</td>
+          </tr>
+          <tr>
+            <td>standish family medicine</td>
+            <td><span class="pos pos-bad">61</span></td>
+            <td>90</td>
+            <td>Local term - should be top 10</td>
+          </tr>
+          <tr>
+            <td>hospital in standish michigan</td>
+            <td><span class="pos pos-bad">51</span></td>
+            <td>40</td>
+            <td>Local term - should be top 10</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>Key finding:</strong> The site is not ranking for any service-based keywords (primary care, family doctor, pediatrician, women's health, etc.). These are the terms patients actually use when searching for care.</p>
+    </div>
+
+    <!-- Target Keywords -->
+    <div class="section">
+      <h2>Recommended Target Keywords</h2>
+      <p class="section-sub">20 keywords we should be tracking and optimizing for</p>
+      <p>These keywords represent what patients in the Standish, MI and Arenac County area are searching for. We've organized them by priority.</p>
+
+      <h3>Tier 1: High-Intent Local Keywords</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Monthly Volume</th>
+            <th>Competition</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>primary care near me</td><td>49,500</td><td>Medium</td><td><span class="badge badge-plan">Target</span></td></tr>
+          <tr><td>family doctor near me</td><td>33,100</td><td>Low</td><td><span class="badge badge-plan">Target</span></td></tr>
+          <tr><td>primary care doctors near me</td><td>49,500</td><td>Medium</td><td><span class="badge badge-plan">Target</span></td></tr>
+          <tr><td>primary care physician near me</td><td>33,100</td><td>Medium</td><td><span class="badge badge-plan">Target</span></td></tr>
+          <tr><td>doctors office near me</td><td>22,200</td><td>Medium</td><td><span class="badge badge-plan">Target</span></td></tr>
+          <tr><td>clinic near me</td><td>90,500</td><td>Medium</td><td><span class="badge badge-plan">Target</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Tier 2: Service Keywords</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Monthly Volume</th>
+            <th>Competition</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>family medicine</td><td>40,500</td><td>Low</td><td><span class="badge badge-plan">Target</span></td></tr>
+          <tr><td>family practice</td><td>18,100</td><td>Low</td><td><span class="badge badge-plan">Target</span></td></tr>
+          <tr><td>primary care physician</td><td>33,100</td><td>Low</td><td><span class="badge badge-plan">Target</span></td></tr>
+          <tr><td>family medicine near me</td><td>9,900</td><td>Low</td><td><span class="badge badge-plan">Target</span></td></tr>
+          <tr><td>family doctor</td><td>14,800</td><td>Low</td><td><span class="badge badge-plan">Target</span></td></tr>
+          <tr><td>health clinic near me</td><td>12,100</td><td>Medium</td><td><span class="badge badge-plan">Target</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Tier 3: Local Standish/Arenac County Terms</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Monthly Volume</th>
+            <th>Competition</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>standish family medicine</td><td>90</td><td>Very Low</td><td><span class="badge badge-done">Optimizing</span></td></tr>
+          <tr><td>hospital in standish michigan</td><td>40</td><td>Very Low</td><td><span class="badge badge-done">Optimizing</span></td></tr>
+          <tr><td>primary care standish mi</td><td>--</td><td>Very Low</td><td><span class="badge badge-done">Optimizing</span></td></tr>
+          <tr><td>family doctor standish mi</td><td>--</td><td>Very Low</td><td><span class="badge badge-done">Optimizing</span></td></tr>
+          <tr><td>doctor arenac county</td><td>--</td><td>Very Low</td><td><span class="badge badge-done">Optimizing</span></td></tr>
+          <tr><td>pediatrician standish mi</td><td>--</td><td>Very Low</td><td><span class="badge badge-done">Optimizing</span></td></tr>
+          <tr><td>women's health standish mi</td><td>--</td><td>Very Low</td><td><span class="badge badge-done">Optimizing</span></td></tr>
+          <tr><td>chronic care management michigan</td><td>--</td><td>Very Low</td><td><span class="badge badge-done">Optimizing</span></td></tr>
+        </tbody>
+      </table>
+      <p><em>Note: Local keywords with "--" volume have low enough search volume that Semrush doesn't track them nationally, but they're highly relevant for local search and Google Maps visibility.</em></p>
+    </div>
+
+    <!-- Changes Made -->
+    <div class="section">
+      <h2>Changes Completed (March 23, 2026)</h2>
+      <p class="section-sub">SEO optimizations published to the live site</p>
+
+      <div class="change-item">
+        <div class="change-icon green">+</div>
+        <div class="change-detail">
+          <div class="change-title">Home Page - Hero Description</div>
+          <div class="change-desc">Updated to include "Standish, MI", "Arenac County", "family medicine", "pediatric care", and "chronic disease management" for local search signals.</div>
+        </div>
+      </div>
+      <div class="change-item">
+        <div class="change-icon green">+</div>
+        <div class="change-detail">
+          <div class="change-title">Home Page - CTA & Services Section</div>
+          <div class="change-desc">Added location keywords ("Standish, MI", "Arenac County") and service terms ("primary care", "women's health") to CTA and services descriptions.</div>
+        </div>
+      </div>
+      <div class="change-item">
+        <div class="change-icon green">+</div>
+        <div class="change-detail">
+          <div class="change-title">Family Medicine - Page Title & Meta Description</div>
+          <div class="change-desc">Title updated to "Family Medicine in Standish, MI". Meta description now includes "family doctor", "primary care", "Arenac County", and "Accepting new patients."</div>
+        </div>
+      </div>
+      <div class="change-item">
+        <div class="change-icon green">+</div>
+        <div class="change-detail">
+          <div class="change-title">Pediatric Care - Page Title & Meta Description</div>
+          <div class="change-desc">Title updated to "Pediatric Care in Standish, MI". Meta description now includes "well-child visits", "immunizations", "developmental screenings", and "Arenac County".</div>
+        </div>
+      </div>
+      <div class="change-item">
+        <div class="change-icon green">+</div>
+        <div class="change-detail">
+          <div class="change-title">Women's Health - Page Title & Meta Description</div>
+          <div class="change-desc">Title updated to "Women's Health Services in Standish, MI". Meta description now includes "gynecological exams", "GYN care", "preventive screenings", and "Arenac County".</div>
+        </div>
+      </div>
+      <div class="change-item">
+        <div class="change-icon green">+</div>
+        <div class="change-detail">
+          <div class="change-title">Chronic Care Management - Page Title & Meta Description</div>
+          <div class="change-desc">Title updated to "Chronic Care Management in Standish, MI". Meta description now includes "diabetes", "heart disease", "hypertension", and "Arenac County primary care provider".</div>
+        </div>
+      </div>
+      <div class="change-item">
+        <div class="change-icon green">+</div>
+        <div class="change-detail">
+          <div class="change-title">Preventive Health - Page Title & Meta Description</div>
+          <div class="change-desc">Title updated to "Preventive Health Services in Standish, MI". Meta description now includes "wellness exams", "immunizations", "health screenings", and "Arenac County family medicine clinic".</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Site Audit -->
+    <div class="section">
+      <h2>Site Health Audit</h2>
+      <p class="section-sub">Technical issues identified by Semrush site crawler (Feb 20, 2026 crawl)</p>
+
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="value bad">21</div>
+          <div class="label">Errors</div>
+        </div>
+        <div class="metric-card">
+          <div class="value warn">208</div>
+          <div class="label">Warnings</div>
+        </div>
+        <div class="metric-card">
+          <div class="value">106</div>
+          <div class="label">Notices</div>
+        </div>
+        <div class="metric-card">
+          <div class="value">69</div>
+          <div class="label">Pages Crawled</div>
+        </div>
+      </div>
+
+      <h3>Errors (High Priority)</h3>
+      <table>
+        <thead>
+          <tr><th>Issue</th><th>Count</th><th>Impact</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Duplicate title tags</td><td>8</td><td><span class="badge badge-high">High</span></td><td><span class="badge badge-done">Partially Fixed</span></td></tr>
+          <tr><td>Duplicate content pages</td><td>8</td><td><span class="badge badge-high">High</span></td><td><span class="badge badge-dev">Needs Dev</span></td></tr>
+          <tr><td>Broken internal links</td><td>5</td><td><span class="badge badge-high">High</span></td><td><span class="badge badge-dev">Needs Dev</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Warnings (Medium Priority)</h3>
+      <table>
+        <thead>
+          <tr><th>Issue</th><th>Count</th><th>Impact</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Pages without H1 tag</td><td>56</td><td><span class="badge badge-med">Medium</span></td><td><span class="badge badge-dev">Needs Dev</span></td></tr>
+          <tr><td>Links with no anchor text</td><td>68</td><td><span class="badge badge-med">Medium</span></td><td><span class="badge badge-dev">Needs Dev</span></td></tr>
+          <tr><td>Low word count pages</td><td>44</td><td><span class="badge badge-med">Medium</span></td><td><span class="badge badge-plan">Content Plan</span></td></tr>
+          <tr><td>Title tag too long</td><td>18</td><td><span class="badge badge-med">Medium</span></td><td><span class="badge badge-dev">Needs Dev</span></td></tr>
+          <tr><td>Orphan pages (no internal links)</td><td>10</td><td><span class="badge badge-med">Medium</span></td><td><span class="badge badge-dev">Needs Dev</span></td></tr>
+          <tr><td>Duplicate meta descriptions</td><td>8</td><td><span class="badge badge-med">Medium</span></td><td><span class="badge badge-done">Partially Fixed</span></td></tr>
+          <tr><td>Missing meta descriptions</td><td>4</td><td><span class="badge badge-med">Medium</span></td><td><span class="badge badge-done">Partially Fixed</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>What Our Updates Fixed</h3>
+      <ul>
+        <li><strong>Duplicate titles:</strong> Each service page now has a unique, location-specific title (e.g., "Family Medicine in Standish, MI" vs generic "Comprehensive Family Medicine")</li>
+        <li><strong>Duplicate/missing meta descriptions:</strong> Each service page now has a unique, keyword-optimized meta description with location signals</li>
+      </ul>
+      <p>A re-crawl is needed in Semrush to verify these fixes are reflected in the score. The remaining issues (H1 tags, anchor text, orphan pages) are template-level and require development work.</p>
+    </div>
+
+    <!-- Roadmap -->
+    <div class="section">
+      <h2>Optimization Roadmap</h2>
+      <p class="section-sub">Phased plan for the next 90-120 days</p>
+
+      <h3>Phase 1: Foundation (Completed)</h3>
+      <ul>
+        <li>Optimized page titles with location keywords across all service pages</li>
+        <li>Wrote unique, keyword-rich meta descriptions for every service</li>
+        <li>Added local signals (Standish, MI / Arenac County) to home page content</li>
+        <li>Identified 20 target keywords for ongoing tracking</li>
+      </ul>
+
+      <h3>Phase 2: Technical Fixes (Next 2-4 weeks)</h3>
+      <ul>
+        <li>Fix missing H1 tags across 56 pages (template-level fix)</li>
+        <li>Resolve 5 broken internal links</li>
+        <li>Add anchor text to 68 links currently missing it</li>
+        <li>Address 8 duplicate content pages (likely www vs non-www or trailing slashes)</li>
+        <li>Connect 10 orphan pages with internal links</li>
+        <li>Connect Google Analytics and Google Search Console to Semrush</li>
+      </ul>
+
+      <h3>Phase 3: Content & Authority (Ongoing)</h3>
+      <ul>
+        <li>Build local citations (Google Business Profile, Yelp, Healthgrades, Vitals, etc.)</li>
+        <li>Publish blog content targeting service keywords (e.g., "When to See a Family Doctor in Standish, MI")</li>
+        <li>Build backlinks from local organizations, Arenac County directories, and healthcare listings</li>
+        <li>Monitor keyword positions monthly and adjust strategy</li>
+      </ul>
+
+      <h3>Monthly Deliverable</h3>
+      <p>We will provide a monthly keyword performance report showing:</p>
+      <ul>
+        <li>Position changes for all 20 tracked keywords</li>
+        <li>Organic traffic trends</li>
+        <li>Site health score changes</li>
+        <li>Completed optimizations and next steps</li>
+      </ul>
+    </div>
+
+    <!-- How It Works -->
+    <div class="section">
+      <h2>How SEO Works (Quick Primer)</h2>
+      <p class="section-sub">For context on what this report measures</p>
+      <p><strong>Keywords</strong> are the words and phrases people type into Google when looking for services. When your website content matches those keywords, Google is more likely to show your site in search results.</p>
+      <p><strong>Rankings/Position</strong> refers to where your site appears in Google results. Position 1 is the top result. Positions 1-10 are on the first page. Most clicks go to the first 3-5 results.</p>
+      <p><strong>Authority Score</strong> is Semrush's measure of your website's overall credibility (0-100). New sites start very low. It grows as you earn backlinks from other websites, publish quality content, and build a track record.</p>
+      <p><strong>Site Health</strong> measures technical SEO factors like page speed, broken links, proper tags, and mobile-friendliness. A score of 79% means there are fixable issues that could be hurting rankings.</p>
+      <p>SEO is a long-term strategy. Changes typically take 30-90 days to fully reflect in rankings. The work we're doing now sets the foundation so that when patients search for care in Standish, MI, Generations Health shows up.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Generations Health SEO Report | Prepared by Practice with Joy | March 2026<br>
+    Data source: Semrush (generationshealthmi.com)
+  </div>
+
+</body>
+</html>
